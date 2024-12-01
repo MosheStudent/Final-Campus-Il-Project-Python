@@ -10,13 +10,8 @@ SERVER_PORT = 5678
 
 def build_and_send_message(conn, code, data):
 	msg = chatlib.build_message(code, data)
-	"""
-	Builds a new message using chatlib, wanted code and message. 
-	Prints debug info, then sends it to the given socket.
-	Paramaters: conn (socket object), code (str), data (str)
-	Returns: Nothing
-	"""
-	# Implement Code
+
+	conn.send(msg.encode())
 	
 
 def recv_message_and_parse(conn):
@@ -45,18 +40,19 @@ def error_and_exit(error_msg):
 
 
 def login(conn):
-    username = input("Please enter username: \n")
-    # Implement code
+    username = input("username: \n")
+	password = input("password: \n")
 	
-	build_and_send_message(conn, chatlib.PROTOCOL_CLIENT["login_msg"],"")
-	
-	# Implement code
-	
-    pass
+	build_and_send_message(conn, chatlib.PROTOCOL_CLIENT["login_msg"], username)
+	build_and_send_message(connn, chatlib.PROTOCOL_CLIENT["login_msg"], password)
+
+	state = recv_message_and_parse(conn)
+
+	print(stat)
 
 def logout(conn):
-    # Implement code
-    pass
+    build_and_send_message(conn, chatlib.PROTOCOL_CLIENT["logout_msg"], "")
+	print("logout")
 
 def main():
     # Implement code
